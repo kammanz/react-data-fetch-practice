@@ -1,71 +1,41 @@
 const data = [
   {
     id: 1,
-    question: 'How are you?',
+    question: 'What best describes your hair?',
     answers: [
       {
         id: 1,
-        answer: 'good',
-        isSelected: false,
+        answer: 'Receding hairline',
       },
-      { id: 2, answer: 'okay', isSelected: false },
-      { id: 3, answer: 'unwell', isSelected: false },
+      { id: 2, answer: 'Thinning at the crown' },
+      { id: 3, answer: 'Overall hair loss/thinning' },
+      { id: 4, answer: 'Full head of hair' },
     ],
   },
   {
     id: 2,
-    question: 'What meals did you eat today?',
+    question: 'What sort of results are you looking for?',
     answers: [
       {
         id: 1,
-        answer: 'breakfast',
-        isSelected: false,
+        answer: 'Regrowing my hair',
       },
-      { id: 2, answer: 'lunch', isSelected: false },
-      { id: 3, answer: 'dinner', isSelected: false },
+      { id: 2, answer: 'Preventing future hair loss' },
+      { id: 3, answer: 'Both regrowth and loss prevention' },
     ],
   },
   {
     id: 3,
-    question: 'How was your exercise?',
+    question:
+      'What best describes your desire to seek hair loss treatment? (Final question)',
     answers: [
       {
         id: 1,
-        answer: 'light',
-        isSelected: false,
+        answer: 'More confidence',
       },
-      { id: 2, answer: 'intense', isSelected: false },
-      { id: 3, answer: 'did not exercise', isSelected: false },
+      { id: 2, answer: 'Improved odds in dating market ' },
+      { id: 3, answer: 'Make life easier for my barber' },
     ],
   },
-  {
-    id: 4,
-    question: 'How many cigarettes did you smoke?',
-    answers: [
-      {
-        id: 1,
-        answer: 'More than 5',
-        isSelected: false,
-      },
-      { id: 2, answer: 'Less than 5', isSelected: false },
-      { id: 3, answer: 'none', isSelected: false },
-    ],
-  },
-  {
-    id: 5,
-    question: 'Did you do a social activity?',
-    answers: [
-      {
-        id: 1,
-        answer: 'yes',
-        isSelected: false,
-      },
-      { id: 2, answer: 'no', isSelected: false },
-    ],
-  },
-  // { id: 3, question: 'How are you?', answers: ['breakfast', 'lunch', 'dinner']},
-  // { id: 3, question: 'How are you?', answers: ['breakfast', 'lunch', 'dinner']},
-  // { id: 3, question: 'How are you?', answers: ['breakfast', 'lunch', 'dinner']},
-  // { id: 3, question: 'How are you?', answers: ['breakfast', 'lunch', 'dinner']},
 ];
 export default data;

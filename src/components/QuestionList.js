@@ -1,66 +1,125 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  Button,
+  Container,
+  Divider,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Paper,
+  Radio,
+  RadioGroup,
+} from '@mui/material';
 import data from '../data';
+
+const questionStyles = {
+  fontSize: '1.2rem',
+  color: 'rgba(0, 0, 0, 0.87) !important;',
+  fontFamily: 'Helvetica, Helvetica, Arial, sans-serif',
+  fontWeight: 500,
+  lineHeight: 1.7,
+  marginBottom: 2,
+  float: 'left',
+};
 
 const QuestionList = () => {
   const [questions, setQuestions] = useState([]);
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [isSelected, setIsSelected] = useState(false);
+  const [value, setValue] = useState('');
 
   useEffect(() => {
     setQuestions(data);
   }, []);
 
-  const handleChange = () => {
-    console.log('handleChange fired');
-    setIsSelected(true);
+  const ref = useRef();
+
+  const scrollTo = (ref) => {
+    if (ref && ref.current) {
+      ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    scrollTo(ref);
+  };
+
   const handleNext = () => {
-    console.log('handleClick fired');
+    setValue('');
     setQuestionIndex(questionIndex + 1);
   };
 
   const handlePrevious = () => {
-    console.log('prev');
     setQuestionIndex(questionIndex - 1);
   };
 
   const renderQuestion = () => {
+    let question = questions[questionIndex];
+
     return (
-      <div>
-        <div>{questions[questionIndex].question}</div>
-        <div>
-          {questions[questionIndex].answers.map((answer, i) => {
+      <FormControl>
+        <FormLabel id="hair-loss-group-label" sx={questionStyles}>
+          {question.question}
+        </FormLabel>
+        <Divider
+          sx={{
+            borderStyle: 'dashed',
+            borderColor: '#000639',
+            marginBottom: 3,
+          }}
+        />
+        <RadioGroup
+          name="hair-loss-group"
+          aria-labelledby="hair-loss-group-label"
+          value={value}
+          onChange={(e) => handleChange(e)}>
+          {question.answers.map((answer) => {
             return (
-              <div>
-                <label htmlFor={i}>{answer.answer}</label>
-                <input
-                  type="radio"
-                  id={i}
-                  checked={isSelected}
-                  onChange={handleChange}
+              <Paper key={answer.id} sx={{ marginBottom: 2 }}>
+                <FormControlLabel
+                  sx={{ float: 'left', marginLeft: 2 }}
+                  key={answer.id}
+                  control={<Radio />}
+                  label={answer.answer}
+                  value={answer.answer}
                 />
-              </div>
+              </Paper>
             );
           })}
-        </div>
-      </div>
+        </RadioGroup>
+      </FormControl>
     );
   };
 
   return (
-    <div>
-      <h1>Question List</h1>
-      <ul>{questions.length > 0 ? renderQuestion() : 'loading...'}</ul>
-      <button type="button" onClick={handleNext}>
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: '90%',
+        maxWidth: '600px',
+      }}>
+      {questions.length > 0 ? renderQuestion() : 'loading...'}
+
+      <Button
+        sx={{ bgcolor: '#ff9800', display: 'block' }}
+        variant="contained"
+        type="button"
+        ref={ref}
+        disabled={
+          !value || questionIndex === questions.length - 1 ? true : false
+        }
+        onClick={handleNext}>
         Next
-      </button>
-      <button
+      </Button>
+      <Button
+        sx={{ display: 'block', color: 'black !important' }}
         type="button"
         onClick={handlePrevious}
-        disabled={questionIndex === 0 ? true : false}>
+        disabled={questionIndex === 0}>
         Previous
-      </button>
-    </div>
+      </Button>
+    </Container>
   );
 };
 
